@@ -7,6 +7,7 @@ export class Square extends Figure {
     }
 
     set name(type) {
+        this._name = 'square';
         this._name = type.includes('figure') ? this._name + ' ' + type : this._name;
     }
 

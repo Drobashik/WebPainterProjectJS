@@ -7,10 +7,7 @@ import { Painter } from './core/Painter'
 import { Tools } from "./core/Tools";
 import View from "./core/View";
 
-const tools = new Tools(
-    new Circle(75, 75, 'black'),
-    new Square(75, 75, 'black')
-);
+const tools = new Tools();
 
 export const painter = new Painter(
     tools,
@@ -23,10 +20,11 @@ export const instrumentExecutor = new Instruments(
 );
 
 new View(
-    ...tools.tools
+    new Circle(75, 75, 'black'),
+    new Square(75, 75, 'black')
 ).renderTools('figures')
-    .addEventListener("click", (event) => {
-        tools.chooseTool.call(tools, event.target);
+    .addEventListener("click", function(event) {
+        tools.chooseTool.call(tools, event.target, Array.from(this.children));
     });
 
 getListenerFunctions().forEach(listener => {
