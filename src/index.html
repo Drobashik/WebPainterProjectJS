@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css" />
+    <script type="module" src="app.js"></script>
+    <title>Web Painter</title>
+</head>
+
+<body>
+    <header>
+        <div class="header container">
+            <div class="instruments" id="instruments">
+                <div class="instruments__drag">
+                    <img src="../assets/icons/drag_icon.svg" alt="Drag">
+                </div>
+                <div class="instruments__paint">
+                    <img src="../assets/icons/paint_icon.svg" alt="Pointer">
+                </div>
+                <div class="instruments__color">
+                    <label for="colorType">
+                        <img src="../assets/icons/palette_icon.svg" alt="Palette">
+                    </label>
+                    <input type="color" name="color" id="colorType">
+                </div>
+                <div class="instruments__size">
+                    <label for="rangeType">
+                        <img src="../assets/icons/range_icon.svg" alt="Range">
+                    </label>
+                    <input type="range" name="range" id="rangeType">
+                </div>
+                <div class="instruments__file">
+                    <label for="fileType">
+                        <img src="../assets/icons/upload_icon.svg" alt="Upload">
+                    </label>
+                    <input type="file" name="file" id="fileType">
+                </div>
+                <div class="instruments__clean" id="recycle">
+                    <img src="../assets/icons/clean_icon.svg" alt="Pointer">
+                </div>
+            </div>
+            <div class="header__logo">
+                <span>Web Painter</span>
+                <img src="../assets/brush_logo.svg" alt="Logo">
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="app container">
+            <div class="app__figure-field" id="figures">
+    
+            </div>
+            <div class="app__painting-field" id="painter">
+    
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
