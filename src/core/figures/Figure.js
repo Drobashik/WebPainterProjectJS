@@ -5,5 +5,7 @@ export class Figure {
         this.width = width;
         this.height = height;
         this.color = color;
+
+        this.isChosen = false;
     }
 }

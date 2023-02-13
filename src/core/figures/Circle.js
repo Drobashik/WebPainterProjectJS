@@ -7,6 +7,7 @@ export class Circle extends Figure {
     }
 
     set name(type) {
+        this._name = 'circle';
         this._name = type.includes('figure') ? this._name + ' ' + type : this._name;
     }
 

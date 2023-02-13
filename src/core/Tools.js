@@ -1,6 +1,5 @@
 export class Tools {
-    constructor(...tools) {
-        this.tools = tools;
+    constructor() {
     }
 
     get figure() {
@@ -11,7 +10,7 @@ export class Tools {
         this._figure = _figure;
     }
 
-    chooseTool(element) {
+    chooseTool(element, tools) {
         if (element.id === 'figures') return;
 
         if (element.className === this.figure) {
@@ -20,6 +19,10 @@ export class Tools {
             return;
         }
         
+        for (const tool of tools) {
+            tool.style.transform = 'scale(1)';
+        }
+
         element.style.transform = 'scale(1.2)';
         this.figure = element.className;
     }
