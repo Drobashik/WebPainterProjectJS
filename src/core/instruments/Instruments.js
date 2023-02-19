@@ -3,10 +3,10 @@ export class Instruments {
         this.instruments = instruments;
     }
 
-    executeWithTool(id = '') {
+    executeWithTool(value, id = '') {
         for (const instrument of this.instruments) {
-            if (id === instrument.instrumentName) {
-                instrument.execute();
+            if (id === instrument.name) {
+                instrument.execute(value);
             }
         }
     }

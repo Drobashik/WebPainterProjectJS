@@ -1,32 +1,20 @@
-import { getListenerFunctions } from "./core/API";
+import { getListenerFunctions } from "./API";
 import { Circle } from "./core/figures/Circle";
 import { Square } from "./core/figures/Square";
-import { Instruments } from "./core/instruments/Instruments";
-import { Recycler } from "./core/instruments/Recycler";
-import { Painter } from './core/Painter'
+import { FiguresRenderer } from "./core/FiguresRenderer";
 import { Tools } from "./core/Tools";
-import View from "./core/View";
 
-const tools = new Tools();
-
-export const painter = new Painter(
-    tools,
-    new Circle(100, 100, 'black'),
-    new Square(100, 100, 'black')
-);
-
-export const instrumentExecutor = new Instruments(
-    new Recycler(painter.paintField)
-);
-
-new View(
+const tools = new Tools([
     new Circle(75, 75, 'black'),
-    new Square(75, 75, 'black')
-).renderTools('figures')
+    new Square(75, 75, 'black'),
+]);
+
+new FiguresRenderer()
+    .renderTools(tools.tools)
     .addEventListener("click", function(event) {
-        tools.chooseTool.call(tools, event.target, Array.from(this.children));
+        tools.chooseTool.call(tools, event.target, this.children)
     });
 
-getListenerFunctions().forEach(listener => {
-    listener.element.addEventListener(listener.event, listener.callback)
-});
+getListenerFunctions(tools).forEach(listener => {
+    listener.element.addEventListener(listener.event, listener.callback);
+})

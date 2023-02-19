@@ -1,11 +1,11 @@
 export class Recycler {
-    constructor(painterField = document.body) {
-        this.painterField = painterField;
-        this.instrumentName = 'recycle';
+    constructor() {
+        this.painterField = document.getElementById('painter');
+        this.name = 'recycle';
     }
 
-    execute() {
-        this.painterField.innerHTML = '';
-        this.painterField.insertAdjacentHTML('afterbegin', '<div class="app__sides"></div>')
+    execute(value) {
+        this.painterField.innerHTML = value;
+        this.painterField.insertAdjacentHTML('afterbegin', '<div class="app__sides"></div>');
     }
 }

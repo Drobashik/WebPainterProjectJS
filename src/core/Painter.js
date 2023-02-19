@@ -1,11 +1,8 @@
-import View from "./View";
+import { FiguresRenderer } from "./FiguresRenderer";
 
 export class Painter {
-    constructor(tools, ...paintingBrushes) {
-        this.tools = tools;
-        this.view = new View(...paintingBrushes);
-        this.painter = paintingBrushes[0];
-
+    constructor(tools) {
+        this.tools = tools
         this.isReadyDraw = false;
         this.paintField = document.getElementById('painter');
     }
@@ -18,16 +15,14 @@ export class Painter {
         this.isReadyDraw = false;
     }
 
-    painting(event) {
-        if (!this.isReadyDraw) return;
-        
-        this.view.renderPainter(
-            'painter',
-            this.tools.figure,
-            {
-                x: event.clientX - this.paintField.offsetLeft - this.painter.width / 2,
-                y: event.clientY - this.paintField.offsetTop - this.painter.height / 2
-            },
-        );
+    painting(tools) {
+        if (!this.isReadyDraw || !this.tools.figure) return;
+
+        for (const tool of tools) {
+            if (tool.name.includes(this.tools.figure)) {
+                tool.name = 'figure';
+                tool.configure();
+            }
+        }
     }
 }
