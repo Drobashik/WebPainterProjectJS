@@ -1,17 +1,21 @@
 import { Figure } from "./Figure";
 
 export class Circle extends Figure {
-    constructor(width, height, color) {
-        super(width, height, color);
-        this._name = 'circle';
+    #_name
+    constructor(width, height, color, position) {
+        super(width, height, color, position);
+        this.#_name = 'circle';
     }
 
     set name(type) {
-        this._name = 'circle';
-        this._name = type.includes('figure') ? this._name + ' ' + type : this._name;
+        this.#_name = type.includes('figure') ? `circle figure` : this.#_name;
     }
 
     get name() {
-        return this._name;
+        return this.#_name;
+    }
+
+    configure() {
+        return super.configureFigure(this);
     }
 }

@@ -1,5 +1,8 @@
 export class Tools {
-    constructor() {
+    constructor(tools) {
+        this.tools = tools;
+
+        this._figure = null;
     }
 
     get figure() {
@@ -10,20 +13,20 @@ export class Tools {
         this._figure = _figure;
     }
 
-    chooseTool(element, tools) {
-        if (element.id === 'figures') return;
+    chooseTool(tool, toolsElements) {
+        if (tool.id === 'tools') return;
 
-        if (element.className === this.figure) {
-            element.style.transform = 'scale(1)';
+        if (tool.className === this.figure) {
+            tool.style.transform = 'scale(1)';
             this.figure = null;
             return;
         }
         
-        for (const tool of tools) {
-            tool.style.transform = 'scale(1)';
+        for (const toolElement of toolsElements) {
+            toolElement.style.transform = 'scale(1)';
         }
 
-        element.style.transform = 'scale(1.2)';
-        this.figure = element.className;
+        tool.style.transform = 'scale(1.2)';
+        this.figure = tool.className;
     }
 }
