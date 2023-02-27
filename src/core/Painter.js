@@ -13,7 +13,7 @@ export class Painter {
         this.isReadyDraw = false;
     }
 
-    painting(tools) {
+    onPaint(tools) {
         if (!this.isReadyDraw || !this.tools.figure) return;
         for (const tool of tools) {
             if (tool.name.includes(this.tools.figure)) {
