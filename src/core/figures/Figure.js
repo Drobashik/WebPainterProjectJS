@@ -1,8 +1,7 @@
 import { ElementConfigurator } from "../ElementConfigurator";
 
 export class Figure {
-
-    constructor(width, height, color = 'black', position = {x: null, y: null}) {
+    constructor(width, height, color = 'black', position = { x: null, y: null }) {
         this.width = width;
         this.height = height;
         this.color = color;
@@ -16,5 +15,4 @@ export class Figure {
         this.elementHandler.insertElement(document.getElementById('painter'), createdFigure)
         return createdFigure;
     }
-    
 }

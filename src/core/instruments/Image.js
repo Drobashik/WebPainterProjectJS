@@ -1,10 +1,10 @@
 import { ElementConfigurator } from "../ElementConfigurator";
 
 export class Image {
-    constructor() {
+    constructor(painterField) {
+        this.paintingField = painterField;
         this.elementHanlder = new ElementConfigurator();
 
-        this.paintingField = document.getElementById('painter');
         this.fileLoader = document.getElementById('fileType');
         this.name = 'fileType';
     }

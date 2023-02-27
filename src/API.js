@@ -1,16 +1,10 @@
-// TODO: finish array of instruments, figures and fields
+import {
+    Instruments, Recycler, Range, Image, Colour,
+    Painter, Tools,
+    Square, Circle
+} from './core/_index';
 
-import { Circle } from "./core/figures/Circle";
-import { Square } from "./core/figures/Square";
-import { Painter } from "./core/Painter";
-import { Instruments } from "./core/instruments/Instruments";
-import { Recycler } from "./core/instruments/Recycler";
-import { Colour } from "./core/instruments/Colour";
-import { Range } from "./core/instruments/Range";
-import { Image } from "./core/instruments/Image";
-
-
-const getTools = (event, element, color, range) => {
+const getTools = (event, element, { range, color }) => {
     return [
         new Circle(
             range.value, range.value, color.value,
@@ -25,33 +19,53 @@ const getTools = (event, element, color, range) => {
                 x: event.clientX - element.offsetLeft - range.value / 2,
                 y: event.clientY - element.offsetTop - range.value / 2
             },
-        )
-    ]
+        ),
+    ];
 }
 
+const intitiateApp = () => {
+    const tools = new Tools([
+        new Circle(75, 75, 'black'),
+        new Square(75, 75, 'black'),
+    ]);
 
-export const getListenerFunctions = (tools) => {
+    const toolChooserElement = tools.renderTools();
+
     const painter = new Painter(tools);
-    const image = new Image();
-    const recylcer = new Recycler();
-    const range = new Range();
-    const colourHandler = new Colour();
-
 
     const instrumentExecutor = new Instruments(
-        recylcer,
-        colourHandler,
-        range,
-        image,
+        new Recycler(painter.paintField),
+        new Image(painter.paintField),
+        new Colour(),
+        new Range(),
     );
 
-
     return [
+        /* Tool object */
+
+        {
+            element: toolChooserElement,
+            event: 'click',
+            callback(event) {
+                tools.chooseTool.call(tools, event.target, this.children)
+            }
+        },
+
+        /* Painting objects */
+
+        {
+            element: document.getElementById('painter'),
+            event: 'mousedown',
+            callback(event) {
+                painter.startPaint();
+                painter.painting(getTools(event, this, instrumentExecutor));
+            }
+        },
         {
             element: document.getElementById('painter'),
             event: 'mousemove',
             callback(event) {
-                painter.painting(getTools(event, this, colourHandler, range));
+                painter.painting(getTools(event, this, instrumentExecutor));
             }
         },
         {
@@ -61,14 +75,9 @@ export const getListenerFunctions = (tools) => {
                 painter.endPainting();
             }
         },
-        {
-            element: document.getElementById('painter'),
-            event: 'mousedown',
-            callback(event) {
-                painter.startPaint();
-                painter.painting(getTools(event, this, colourHandler, range));
-            }
-        },
+
+        /* Instrument objects */
+
         {
             element: document.getElementById('recycle'),
             event: 'click',
@@ -89,7 +98,7 @@ export const getListenerFunctions = (tools) => {
             callback: (event) => {
                 instrumentExecutor.executeWithTool.call(
                     instrumentExecutor, event.target.value, 'rangeType'
-                )
+                );
             }
         },
         {
@@ -98,15 +107,15 @@ export const getListenerFunctions = (tools) => {
             callback: (event) => {
                 instrumentExecutor.executeWithTool.call(
                     instrumentExecutor, event.target.files[0], 'fileType'
-                )
+                );
             }
         },
         {
             element: document,
             event: 'click',
-            callback: (event) => {
-                range.handleClick.call(range, event)
-            }
-        }
-    ]
+            callback: instrumentExecutor.range.handleClick,
+        },
+    ];
 }
+
+export default intitiateApp;

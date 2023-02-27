@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serifz;
-    background-color: bisque;
+    background-color: #d4eaec;
     min-height: 100vh;
     overflow: hidden;
 }
@@ -82,13 +82,13 @@ header {
     width: 50px;
     border: 1px solid #000;
     border-radius: 10px;
-    background-color: bisque;
+    background-color: inherit;
     cursor: pointer;
     transition: 200ms;
 }
 
 .instruments > div:hover {
-    background-color: rgb(255, 240, 222);
+    background-color: rgb(228, 228, 228);
 }
 
 .instruments > div:active {
@@ -136,7 +136,7 @@ header {
 .app__sides::before {
     position: absolute;
     content: "";
-    background-color: bisque;
+    background-color: #d4eaec;
     top: 100%;
     left: -250px;
     width: 150%;
@@ -147,7 +147,7 @@ header {
 .app__sides::after {
     position: absolute;
     content: "";
-    background-color: bisque;
+    background-color: #d4eaec;
     bottom: 100%;
     left: -250px;
     width: 150%;
@@ -158,10 +158,10 @@ header {
 .app__painting-field::before {
     position: absolute;
     content: "";
-    background-color: bisque;
+    background-color: #d4eaec;
     top: -100px;
-    left: -250px;
-    width: 17%;
+    left: -75px;
+    width: 75px;
     height: 100vh;
     z-index: 10;
 }
@@ -169,7 +169,7 @@ header {
 .app__painting-field::after {
     position: absolute;
     content: "";
-    background-color: bisque;
+    background-color: #d4eaec;
     top: 0;
     right: -75px;
     width: 75px;

@@ -1,16 +1,20 @@
+import { ElementConfigurator } from "./ElementConfigurator";
+
 export class Tools {
+    #_figure
     constructor(tools) {
         this.tools = tools;
-
-        this._figure = null;
+        this.elementHandler = new ElementConfigurator();
+        this.#_figure = null;
+        this.toolsFieldElement = document.getElementById('tools');
     }
 
     get figure() {
-        return this._figure;
+        return this.#_figure;
     }
 
     set figure(_figure) {
-        this._figure = _figure;
+        this.#_figure = _figure;
     }
 
     chooseTool(tool, toolsElements) {
@@ -18,15 +22,25 @@ export class Tools {
 
         if (tool.className === this.figure) {
             tool.style.transform = 'scale(1)';
-            this.figure = null;
+            this.#_figure = null;
             return;
         }
-        
+
         for (const toolElement of toolsElements) {
             toolElement.style.transform = 'scale(1)';
         }
 
         tool.style.transform = 'scale(1.2)';
-        this.figure = tool.className;
+        this.#_figure = tool.className;
+    }
+
+    renderTools() {
+        for (const tool of this.tools) {
+            const createdTool = this.elementHandler.configureElement(tool)
+            this.elementHandler.insertElement(
+                this.toolsFieldElement, createdTool
+            );
+        }
+        return this.toolsFieldElement;
     }
 }

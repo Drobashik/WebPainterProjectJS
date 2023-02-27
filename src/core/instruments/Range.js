@@ -14,15 +14,20 @@ export class Range {
     }
 
     handleClick(event) {
-        if (event.target.name === 'range' ||
+        const rangeElementID = document.querySelector('#size');
+        const rangeElementClass = document.querySelector('.size__block');
+
+        const isRangeElement = event.target.name === 'range' ||
             event.target.className === 'size__block' ||
-            event.target.id === 'size') {
-            document.querySelector('.size__block').style.display = 'block';
-            document.querySelector('#size').style.backgroundColor = '#fff';
+            event.target.id === 'size'
+
+        if (isRangeElement) {
+            rangeElementClass.style.display = 'block';
+            rangeElementID.style.backgroundColor = '#fff';
             return;
         }
 
-        document.querySelector('.size__block').style.display = 'none';
-        document.querySelector('#size').style.backgroundColor = 'inherit';
+        rangeElementClass.style.display = 'none';
+        rangeElementID.style.backgroundColor = 'inherit';
     }
 }
