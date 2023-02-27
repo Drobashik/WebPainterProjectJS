@@ -1,5 +1,3 @@
-import { FiguresRenderer } from "./FiguresRenderer";
-
 export class Painter {
     constructor(tools) {
         this.tools = tools
@@ -17,7 +15,6 @@ export class Painter {
 
     painting(tools) {
         if (!this.isReadyDraw || !this.tools.figure) return;
-
         for (const tool of tools) {
             if (tool.name.includes(this.tools.figure)) {
                 tool.name = 'figure';

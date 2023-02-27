@@ -1,6 +1,6 @@
 export class Recycler {
-    constructor() {
-        this.painterField = document.getElementById('painter');
+    constructor(painterField) {
+        this.painterField = painterField;
         this.name = 'recycle';
     }
 
