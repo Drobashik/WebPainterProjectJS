@@ -1,4 +1,5 @@
 import { ElementConfigurator } from "./ElementConfigurator";
+import { Circle, Square } from "./_index";
 
 export class Tools {
     #_figure
@@ -42,5 +43,24 @@ export class Tools {
             );
         }
         return this.toolsFieldElement;
+    }
+
+    getTools(event, element, { range, color }) {
+        return [
+            new Circle(
+                range.value, range.value, color.value,
+                {
+                    x: event.clientX - element.offsetLeft - range.value / 2,
+                    y: event.clientY - element.offsetTop - range.value / 2
+                },
+            ),
+            new Square(
+                range.value, range.value, color.value,
+                {
+                    x: event.clientX - element.offsetLeft - range.value / 2,
+                    y: event.clientY - element.offsetTop - range.value / 2
+                },
+            ),
+        ];
     }
 }

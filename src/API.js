@@ -1,27 +1,7 @@
 import {
     Instruments, Recycler, Range, Image, Colour,
-    Painter, Tools,
-    Square, Circle
+    Painter, Tools, Circle, Square,
 } from './core/_index';
-
-const getTools = (event, element, { range, color }) => {
-    return [
-        new Circle(
-            range.value, range.value, color.value,
-            {
-                x: event.clientX - element.offsetLeft - range.value / 2,
-                y: event.clientY - element.offsetTop - range.value / 2
-            },
-        ),
-        new Square(
-            range.value, range.value, color.value,
-            {
-                x: event.clientX - element.offsetLeft - range.value / 2,
-                y: event.clientY - element.offsetTop - range.value / 2
-            },
-        ),
-    ];
-}
 
 const intitiateApp = () => {
     const tools = new Tools([
@@ -47,7 +27,7 @@ const intitiateApp = () => {
             element: toolChooserElement,
             event: 'click',
             callback(event) {
-                tools.chooseTool.call(tools, event.target, this.children)
+                tools.chooseTool(event.target, this.children)
             }
         },
 
@@ -58,14 +38,14 @@ const intitiateApp = () => {
             event: 'mousedown',
             callback(event) {
                 painter.startPaint();
-                painter.painting(getTools(event, this, instrumentExecutor));
+                painter.onPaint(tools.getTools(event, this, instrumentExecutor));
             }
         },
         {
             element: document.getElementById('painter'),
             event: 'mousemove',
             callback(event) {
-                painter.painting(getTools(event, this, instrumentExecutor));
+                painter.onPaint(tools.getTools(event, this, instrumentExecutor));
             }
         },
         {
@@ -81,34 +61,30 @@ const intitiateApp = () => {
         {
             element: document.getElementById('recycle'),
             event: 'click',
-            callback: instrumentExecutor.executeWithTool.bind(instrumentExecutor, '', 'recycle')
+            callback: () => {
+                instrumentExecutor.executeWithTool(null, 'recycle');
+            }
         },
         {
             element: document.getElementById('colorType'),
             event: 'input',
             callback: (event) => {
-                instrumentExecutor.executeWithTool.call(
-                    instrumentExecutor, event.target.value, 'colorType'
-                );
-            }
+                instrumentExecutor.executeWithTool(event.target.value, 'colorType');
+            },
         },
         {
             element: document.getElementById('rangeType'),
             event: 'change',
             callback: (event) => {
-                instrumentExecutor.executeWithTool.call(
-                    instrumentExecutor, event.target.value, 'rangeType'
-                );
-            }
+                instrumentExecutor.executeWithTool(event.target.value, 'rangeType');
+            },
         },
         {
             element: document.getElementById('fileType'),
             event: 'change',
             callback: (event) => {
-                instrumentExecutor.executeWithTool.call(
-                    instrumentExecutor, event.target.files[0], 'fileType'
-                );
-            }
+                instrumentExecutor.executeWithTool(event.target.files[0], 'fileType');
+            },
         },
         {
             element: document,
