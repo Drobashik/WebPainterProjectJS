@@ -83,7 +83,7 @@ const intitiateApp = () => {
             element: document.getElementById('fileType'),
             event: 'change',
             callback: (event) => {
-                instrumentExecutor.executeWithTool(event.target.files[0], 'fileType');
+                instrumentExecutor.executeWithTool(event, 'fileType');
             },
         },
         {

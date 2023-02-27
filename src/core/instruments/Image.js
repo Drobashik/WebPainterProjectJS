@@ -9,14 +9,17 @@ export class Image {
         this.name = 'fileType';
     }
 
-    execute(file) {
-        const fileUrl = URL.createObjectURL(file);
+    execute(event) {
+        const fileUrl = URL.createObjectURL(event.target.files[0]);
         const imageElement = this.elementHanlder.createElement('img', this);
         imageElement.src = fileUrl;
-        this.elementHanlder.insertElement(this.paintingField, imageElement);
-        this.elementHanlder.setElementPosition(imageElement, {
-            x: this.paintingField.offsetLeft / 2,
-            y: this.paintingField.offsetTop / 2,
-        });
+        setTimeout(() => {
+            this.elementHanlder.insertElement(this.paintingField, imageElement);
+            this.elementHanlder.setElementPosition(imageElement, {
+                x: this.paintingField.offsetWidth / 2 - imageElement.offsetWidth / 2,
+                y: this.paintingField.offsetHeight / 2 - imageElement.offsetHeight / 2,
+            });
+            event.target.value = null;
+        }, 10);
     }
 }
