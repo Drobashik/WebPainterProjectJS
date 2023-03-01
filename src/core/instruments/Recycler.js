@@ -8,4 +8,6 @@ export class Recycler {
         this.painterField.innerHTML = value;
         this.painterField.insertAdjacentHTML('afterbegin', '<div class="app__sides"></div>');
     }
+
+    reset() {}
 }

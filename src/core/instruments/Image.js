@@ -3,6 +3,7 @@ import { ElementConfigurator } from "../ElementConfigurator";
 export class Image {
     constructor(painterField) {
         this.paintingField = painterField;
+        
         this.elementHanlder = new ElementConfigurator();
 
         this.fileLoader = document.getElementById('fileType');
@@ -13,6 +14,8 @@ export class Image {
         const fileUrl = URL.createObjectURL(event.target.files[0]);
         const imageElement = this.elementHanlder.createElement('img', this);
         imageElement.src = fileUrl;
+        imageElement.draggable = false;
+
         setTimeout(() => {
             this.elementHanlder.insertElement(this.paintingField, imageElement);
             this.elementHanlder.setElementPosition(imageElement, {
@@ -22,4 +25,6 @@ export class Image {
             event.target.value = null;
         }, 10);
     }
+
+    reset() { }
 }

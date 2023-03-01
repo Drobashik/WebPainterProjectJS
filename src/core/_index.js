@@ -7,6 +7,7 @@ import { Painter } from "./Painter";
 import { Tools } from "./Tools";
 import { Circle } from "./figures/Circle";
 import { Square } from "./figures/Square";
+import { Dragger } from "./instruments/Dragger";
 
 export {
     Instruments,
@@ -18,4 +19,5 @@ export {
     Tools,
     Circle,
     Square,
+    Dragger,
 }

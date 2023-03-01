@@ -1,4 +1,5 @@
 import { Colour } from "./Colour";
+import { Dragger } from "./Dragger";
 import { Range } from "./Range";
 
 export class Instruments {
@@ -14,11 +15,21 @@ export class Instruments {
         return this.instruments.find(instrument => instrument instanceof Range);
     }
 
+    get dragger() {
+        return this.instruments.find(instrument => instrument instanceof Dragger)
+    }
+
     executeWithTool(value, id = '') {
         for (const instrument of this.instruments) {
             if (id === instrument.name) {
                 instrument.execute(value);
             }
+        }
+    }
+
+    reset() { 
+        for (const instrument of this.instruments) {
+            instrument.reset();
         }
     }
 }
