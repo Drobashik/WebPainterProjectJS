@@ -13,4 +13,6 @@ export class Colour {
     execute(value) {
         this.#_value = value;
     }
+    
+    reset() {}
 }

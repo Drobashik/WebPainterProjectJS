@@ -1,6 +1,6 @@
 import {
     Instruments, Recycler, Range, Image, Colour,
-    Painter, Tools, Circle, Square,
+    Painter, Tools, Circle, Square, Dragger
 } from './core/_index';
 
 const intitiateApp = () => {
@@ -16,6 +16,7 @@ const intitiateApp = () => {
     const instrumentExecutor = new Instruments(
         new Recycler(painter.paintField),
         new Image(painter.paintField),
+        new Dragger(tools),
         new Colour(),
         new Range(),
     );
@@ -27,7 +28,7 @@ const intitiateApp = () => {
             element: toolChooserElement,
             event: 'click',
             callback(event) {
-                tools.chooseTool(event.target, this.children)
+                tools.chooseTool(event.target, instrumentExecutor)
             }
         },
 
@@ -90,6 +91,37 @@ const intitiateApp = () => {
             element: document,
             event: 'click',
             callback: instrumentExecutor.range.handleClick,
+        },
+
+        // drag objects
+
+        {
+            element: document.getElementById('dragger'),
+            event: 'click',
+            callback() {
+                instrumentExecutor.dragger.setDragger();
+            }
+        },
+        {
+            element: painter.paintField,
+            event: 'mousedown',
+            callback(event) {
+                instrumentExecutor.dragger.startDrag(event, this);
+            }
+        },
+        {
+            element: painter.paintField,
+            event: 'mousemove',
+            callback(event) {
+                instrumentExecutor.dragger.drag(event, this)
+            }
+        },
+        {
+            element: painter.paintField,
+            event: 'mouseup',
+            callback() {
+                instrumentExecutor.dragger.endDrag();
+            }
         },
     ];
 }

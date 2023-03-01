@@ -177,6 +177,11 @@ header {
     z-index: 10;
 }
 
+.app__painting-field img {
+    position: absolute;
+    z-index: 9;
+}
+
 .app {
     display: flex;
     justify-content: space-between;

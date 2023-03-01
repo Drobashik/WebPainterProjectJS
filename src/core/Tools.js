@@ -6,6 +6,7 @@ export class Tools {
     constructor(tools) {
         this.tools = tools;
         this.elementHandler = new ElementConfigurator();
+
         this.#_figure = null;
         this.toolsFieldElement = document.getElementById('tools');
     }
@@ -18,8 +19,9 @@ export class Tools {
         this.#_figure = _figure;
     }
 
-    chooseTool(tool, toolsElements) {
+    chooseTool(tool, instrumentExecutor) {
         if (tool.id === 'tools') return;
+        instrumentExecutor.reset();
 
         if (tool.className === this.figure) {
             tool.style.transform = 'scale(1)';
@@ -27,7 +29,7 @@ export class Tools {
             return;
         }
 
-        for (const toolElement of toolsElements) {
+        for (const toolElement of this.toolsFieldElement.children) {
             toolElement.style.transform = 'scale(1)';
         }
 
@@ -43,6 +45,13 @@ export class Tools {
             );
         }
         return this.toolsFieldElement;
+    }
+
+    reset() {
+        for (const toolElement of this.toolsFieldElement.children) {
+            toolElement.style.transform = 'scale(1)';
+        }
+        this.#_figure = null;
     }
 
     getTools(event, element, { range, color }) {
